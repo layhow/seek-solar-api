@@ -6,8 +6,8 @@ var path = require('path');
 exports.get = function(event, context, callback) {
   var result = {
     statusCode: 200,
-    body: "This is a seek solar api server",
-    headers: {'content-type': 'text/html'}
+    body: {message: "This is a seek solar api server"},
+    headers: {'content-type': 'application/json'}
   };
 
   callback(null, result);
