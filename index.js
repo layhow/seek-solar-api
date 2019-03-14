@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import config from './config'
+import config from './src/config'
 
 
 // main is where our application resides
