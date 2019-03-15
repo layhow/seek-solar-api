@@ -32,12 +32,13 @@
         "serve": "NODE_ENV=production node --prof dist/index.js",
         "test": "cross-env NODE_ENV=test node_modules/.bin/nyc --reporter=text mocha --recursive",
         "test-dev": "cross-env NODE_ENV=test node_modules/.bin/nyc --reporter=text mocha --recursive --watch test/**/*.js",
-        "cover": "cross-env NODE_ENV=test node_modules/.bin/nyc report --reporter=text-summary"
+        "cover": "cross-env NODE_ENV=test node_modules/.bin/nyc report --reporter=text-summary",
+        "api": "sam local start-api"
     },
     "eslintConfig": {
         "env": {
-          "node": true,
-          "mocha": true
+            "node": true,
+            "mocha": true
         }
     }
 }
