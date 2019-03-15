@@ -5,8 +5,11 @@
     "private": true,
     "dependencies": {
         "ajv": "^5.3.0",
+        "aws-sdk": "^2.422.0",
         "body-parser": "^1.18.2",
         "convict": "^4.0.1",
+        "dotenv": "^7.0.0",
+        "dynamodb-geo": "^0.4.0",
         "express": "^4.16.2",
         "helmet": "^3.12.0",
         "morgan": "^1.9.0",
@@ -15,15 +18,15 @@
         "request-promise": "^4.2.2"
     },
     "devDependencies": {
-        "mocha": "5.0.0",
-        "unit.js": "2.0.0",
         "babel-cli": "^6.26.0",
         "babel-plugin-istanbul": "^4.1.5",
         "babel-preset-env": "^1.6.0",
         "babel-register": "^6.26.0",
         "chai": "^4.1.2",
         "cross-env": "^5.1.1",
-        "nyc": "^11.4.1"
+        "mocha": "5.0.0",
+        "nyc": "^11.4.1",
+        "unit.js": "2.0.0"
     },
     "scripts": {
         "start": "node dist/index.js",
