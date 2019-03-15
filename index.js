@@ -39,7 +39,7 @@ exports.get = async(event, context, callback) {
   
       var result = {
       statusCode: 200,
-      body: JSON.stringigfy({message: response}),
+      body: JSON.stringify({message: coordData}),
       headers: {'content-type': 'application/json'}
     };
   
