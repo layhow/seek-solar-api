@@ -5,7 +5,7 @@ var path = require('path');
 var AWS = require('aws-sdk')
 const ddbGeo = require('dynamodb-geo');
 
-exports.get = function(event, context, callback) {
+exports.get = async(event, context, callback) {
   AWS.config.update({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
@@ -16,7 +16,8 @@ exports.get = function(event, context, callback) {
   const dbconfig = new ddbGeo.GeoDataManagerConfiguration(ddb, process.env.TABLE_NAME);
   const myGeoTableManager = new ddbGeo.GeoDataManager(dbconfig);
 
-  myGeoTableManager.queryRectangle({
+  
+  let coordData = await myGeoTableManager.queryRectangle({
       MinPoint: {
           latitude: 2.993943,
           longitude: 101.52711
@@ -26,13 +27,21 @@ exports.get = function(event, context, callback) {
           longitude: 101.528993
       }
   })
-  .then(function(response) {
-    var result = {
+//   .then(function(response) {
+//     var result = {
+//       statusCode: 200,
+//       body: JSON.stringify({message: response}),
+//       headers: {'content-type': 'application/json'}
+//     };
+
+//     callback(null, result);
+//   });
+  
+      var result = {
       statusCode: 200,
-      body: JSON.stringify({message: response}),
+      body: JSON.stringigfy({message: response}),
       headers: {'content-type': 'application/json'}
     };
-
+  
     callback(null, result);
-  });
 };
