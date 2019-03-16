@@ -16,32 +16,19 @@ exports.get = async (event, context, callback) => {
   const dbconfig = new ddbGeo.GeoDataManagerConfiguration(ddb, process.env.TABLE_NAME);
   const myGeoTableManager = new ddbGeo.GeoDataManager(dbconfig);
 
-  
-  let coordData = await myGeoTableManager.queryRectangle({
-      MinPoint: {
-          latitude: 2.993943,
-          longitude: 101.52711
-      },
-      MaxPoint: {
-          latitude: 2.994002,
-          longitude: 101.528993
-      }
+  let coordData = await myGeoTableManager.queryRadius({
+    RadiusInMeter: 10000,
+    CenterPoint: {
+        latitude: 2.993354,
+        longitude: 101.528086
+    }
   })
-//   .then(function(response) {
-//     var result = {
-//       statusCode: 200,
-//       body: JSON.stringify({message: response}),
-//       headers: {'content-type': 'application/json'}
-//     };
-
-//     callback(null, result);
-//   });
   
-      var result = {
-      statusCode: 200,
-      body: JSON.stringify({message: coordData}),
-      headers: {'content-type': 'application/json'}
-    };
+  var result = {
+    statusCode: 200,
+    body: JSON.stringify({message: coordData}),
+    headers: {'content-type': 'application/json'}
+  };
   
-    callback(null, result);
+  callback(null, result);
 };
