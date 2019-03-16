@@ -14,6 +14,7 @@ exports.get = async (event, context, callback) => {
 
   const ddb = new AWS.DynamoDB({ endpoint: new AWS.Endpoint(process.env.ENDPOINT) });
   const dbconfig = new ddbGeo.GeoDataManagerConfiguration(ddb, process.env.TABLE_NAME);
+  
   const myGeoTableManager = new ddbGeo.GeoDataManager(dbconfig);
 
   let coordData = await myGeoTableManager.queryRadius({
