@@ -1,5 +1,6 @@
 const ddbGeo = require('dynamodb-geo');
 const AWS = require('aws-sdk');
+require('dotenv').config();
 
 // Set up AWS
 AWS.config.update({
@@ -20,22 +21,36 @@ exports.get = async (event, context, callback) => {
   const capitalsManager = new ddbGeo.GeoDataManager(config);
 
   var coordData = await capitalsManager.queryRadius({
-    RadiusInMeter: 10000,
+    RadiusInMeter: 20,
     CenterPoint: {
       latitude: 2.992481,
       longitude: 101.524913
     }
   })
 
-  console.log(coordData);
+  const nearbyCoords = coordData.map(item => {
+    const obj = restructureData(item.otherPoints.L)
+    return obj;
+  })
 
-
-  // console.log(coordData)
   var result = {
     statusCode: 200,
-    body: JSON.stringify({ message: coordData }),
-    //headers: {'content-type': 'application/json'}
+    body: JSON.stringify({ message: nearbyCoords }),
   };
 
   callback(null, result);
 };
+
+function restructureData(dataPoints) {
+    var resObj = dataPoints.map(point => {
+      const coordinates = {}
+
+      coordinates.lat = point.M.lat.N;
+      coordinates.long = point.M.long.N;
+
+      return coordinates;
+    })
+
+    console.log(resObj);
+    return resObj;
+}
